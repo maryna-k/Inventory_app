@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_container"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/list_item_name" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/list_item_price" />
+
+    <TextView
+        android:id="@+id/quantity"
+        style="@style/list_item_qty" />
+
+    <Button
+        android:id="@+id/sellOneItem"
+        style="@style/list_button_sell"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+
+</RelativeLayout>

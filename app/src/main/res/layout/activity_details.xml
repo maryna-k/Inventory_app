@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/product_name"
+        style="@style/list_item_name" />
+
+    <!--<ImageView
+        android:id="@+id/product_image"
+        android:style="@style/productImage"/>-->
+
+    <TextView
+        android:id="@+id/product_price"
+        style="@style/product_details"
+        android:layout_below="@id/product_name" />
+
+    <TextView
+        android:id="@+id/product_qty"
+        style="@style/product_details"
+        android:layout_below="@id/product_price" />
+
+    <LinearLayout
+        android:id="@+id/qty_sold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/product_qty">
+        <Button
+            android:id="@+id/button_sold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Sold"/>
+
+        <EditText
+            android:id="@+id/enterNumberSold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Quantity"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/qty_received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/qty_sold">
+        <Button
+            android:id="@+id/button_received"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Received"/>
+
+        <EditText
+            android:id="@+id/enterNumberReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Quantity"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/supplier"
+        style="@style/product_details"
+        android:layout_below="@id/qty_received"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/email"
+        style="@style/product_details"
+        android:layout_below="@id/supplier"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/button_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/email"
+        android:text="Order"/>
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/button_order"
+        android:text="Delete"/>
+
+</RelativeLayout>

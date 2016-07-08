@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="list_item_name">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="list_item_price">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="list_item_qty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_below">@id/name</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="list_button_sell">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_below">@id/price</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:text">sell item</item>
+    </style>
+
+    <style name="add_product_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="product_details">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <!-- <style name="productImage">
+         <item name="android:layout_width">140dp</item>
+         <item name="android:layout_height">200dp</item>
+         <item name="android:layout_alignParentRight">true</item>
+     </style>-->
+
+
+</resources>
