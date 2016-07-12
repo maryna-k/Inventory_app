@@ -51,7 +51,6 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + Contract.Products.TABLE_NAME + " ( " +
-                        //Contract.Products.PID + " INTEGER PRIMARY KEY," +
                         Contract.Products.PNAME + " TEXT PRIMARY KEY" + ", " +
                         Contract.Products.PRICE + " DECIMAL" + ", " +
                         Contract.Products.QTY + " INTEGER" + ", " +
@@ -112,17 +111,6 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
         cursor.moveToFirst();
         return cursor;
     }
-
-    /*public void sellOneItem(int quantity, String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        quantity--;
-        ContentValues values = new ContentValues();
-        values.put(Contract.Products.QTY, quantity);
-        String where = "product_name =?";
-        String[] whereArgs = {name};
-        db.update(Contract.Products.TABLE_NAME, values, where, whereArgs);
-        notifyObservers();
-    }*/
 
     public int getCurrentQty (String name) {
         SQLiteDatabase db = this.getReadableDatabase();

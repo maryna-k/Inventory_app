@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class InventoryCursorAdapter extends CursorAdapter{
+public class InventoryCursorAdapter extends CursorAdapter implements Observer{
     private LayoutInflater cursorInflater;
     Context context;
     DBHelper helper = DBHelper.getInstance(context);
+    Cursor cursor;
+    InventoryCursorAdapter itemAdapter;
 
     // Default constructor
     public InventoryCursorAdapter(Context context, Cursor cursor, int flags) {
@@ -46,20 +48,24 @@ public class InventoryCursorAdapter extends CursorAdapter{
 
         Button sellOneItem = (Button) view.findViewById(R.id.sellOneItem);
 
+        //handles "Sell Item" button from the MainActivity
         sellOneItem.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View arg1) {
                 int quantity = qty;
-                helper.decreaseQty(quantity, 1, name);
                 Log.v("Name is: ", name);
-                Cursor c1 = helper.getOneProduct(name);
-                Log.v("Name is: ", name);
-                int newQty = c1.getInt(c1.getColumnIndexOrThrow("quantity"));
-                //int newQty = quantity - 1;
+                int newQty = quantity - 1;
                 itemQty.setText("Quantity: " + String.valueOf(newQty));
-                //cursor = helper.getAllProducts();
-                Log.v("Click on BUTTON works!", "Click on BUTTON works! Quantity is now " + qty);
+                helper.decreaseQty(quantity, 1, name);
             }
         });
+    }
+
+    @Override
+    public void update() {
+        if (cursor != null) {
+            Cursor newCursor = helper.getAllProducts();
+            itemAdapter.swapCursor(newCursor);
+        }
     }
 }

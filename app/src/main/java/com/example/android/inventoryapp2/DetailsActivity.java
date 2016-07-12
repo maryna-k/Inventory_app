@@ -61,29 +61,6 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
         delete.setOnClickListener(handleDelete);
     }
 
-    /*View.OnClickListener handleSold = new View.OnClickListener() {
-        public void onClick(View v) {
-            int difference = quantitySold();
-            int currQty = helper.getCurrentQty(name);
-            helper.decreaseQty(currQty, difference, name);
-            if (currQty - difference >= 0) {
-                TextView itemQty = (TextView) findViewById(R.id.product_qty);
-                itemQty.setText("Quantity: " + String.valueOf(currQty - difference));
-            }
-        }
-    };
-
-    View.OnClickListener handleReceived = new View.OnClickListener() {
-        public void onClick(View v) {
-            int difference = quantityReceived();
-            int currQty = helper.getCurrentQty(name);
-            helper.increaseQty(currQty, difference, name);
-            TextView itemQty = (TextView) findViewById(R.id.product_qty);
-            itemQty.setText("Quantity: " + String.valueOf(currQty + difference));
-        }
-    };*/
-
-
     View.OnClickListener handleSold = new View.OnClickListener() {
         public void onClick(View v) {
             int difference = quantitySold();

@@ -39,16 +39,16 @@ public class MainActivity extends AppCompatActivity implements Observer{
         itemAdapter = new InventoryCursorAdapter(MainActivity.this, cursor, 0);
 
         listView.setAdapter (itemAdapter);
-        listView.setItemsCanFocus(false);
+        listView.setItemsCanFocus(false); //helps to make both view and a sell button clickable
 
+        //opens DetailsActivity if the listview is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                String name = cursor.getString(cursor.getColumnIndexOrThrow("product_name"));
-                intent.putExtra("name_to_display", name);
-                Log.v("Name is: ", name);
-                Log.v("Position is: ", String.valueOf(position));
+                cursor.moveToPosition(position);
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("product_name")); //finds the name of the product at this position
+                intent.putExtra("name_to_display", name); //sends the name to the DetailsActivity
                 startActivity(intent);
             }
         });
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements Observer{
         addProduct.setOnClickListener(handleAddProduct);
     }
 
+    //add button opens AddProduct activity
     View.OnClickListener handleAddProduct = new View.OnClickListener() {
         public void onClick(View v) {
             Intent bIntent = new Intent(MainActivity.this, AddProductActivity.class);
@@ -64,13 +65,12 @@ public class MainActivity extends AppCompatActivity implements Observer{
         }
     };
 
+    //method of the observer. Whenever there is a change in the database, the cursor is reloaded
     @Override
     public void update() {
         if (cursor != null) {
             Cursor newCursor = helper.getAllProducts();
             itemAdapter.swapCursor(newCursor);
-            ListView listView = (ListView) findViewById(R.id.list);
-            itemAdapter.bindView(listView, this, newCursor);
         }
     }
 }
