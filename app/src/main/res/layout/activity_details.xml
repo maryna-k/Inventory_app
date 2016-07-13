@@ -75,20 +75,36 @@
         android:layout_below="@id/supplier"
         android:layout_marginTop="20dp" />
 
-    <Button
-        android:id="@+id/button_order"
+    <LinearLayout
+        android:id="@+id/qty_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@id/email"
-        android:text="Order"/>
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/email">
+        <Button
+            android:id="@+id/button_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Order"/>
+
+        <EditText
+            android:id="@+id/enterNumberToOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Quantity"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@id/button_order"
-        android:text="Delete"/>
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Delete product"/>
 
 </RelativeLayout>
