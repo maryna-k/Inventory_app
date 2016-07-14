@@ -54,9 +54,11 @@ public class InventoryCursorAdapter extends CursorAdapter implements Observer{
             public void onClick(View arg1) {
                 int quantity = qty;
                 Log.v("Name is: ", name);
-                int newQty = quantity - 1;
-                itemQty.setText("Quantity: " + String.valueOf(newQty));
                 helper.decreaseQty(quantity, 1, name);
+                int newQty = quantity - 1;
+                if (newQty >= 0) {
+                    itemQty.setText("Quantity: " + String.valueOf(newQty));
+                }
             }
         });
     }

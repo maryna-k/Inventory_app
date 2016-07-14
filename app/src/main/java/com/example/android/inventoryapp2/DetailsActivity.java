@@ -64,6 +64,7 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
         delete.setOnClickListener(handleDelete);
     }
 
+    //handles the button that substracts a specified amount from the quantity of the product
     View.OnClickListener handleSold = new View.OnClickListener() {
         public void onClick(View v) {
             int difference = quantitySold();
@@ -73,32 +74,6 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
                 TextView itemQty = (TextView) findViewById(R.id.product_qty);
                 itemQty.setText("Quantity: " + String.valueOf(qty - difference));
             }
-        }
-    };
-
-    View.OnClickListener handleReceived = new View.OnClickListener() {
-        public void onClick(View v) {
-            int difference = quantityReceived();
-            helper.increaseQty(qty, difference, name);
-            TextView itemQty = (TextView) findViewById(R.id.product_qty);
-            itemQty.setText("Quantity: " + String.valueOf(qty + difference));
-        }
-    };
-
-    View.OnClickListener handleOrder = new View.OnClickListener() {
-        public void onClick(View v) {
-            int qtyToOrder = quantityToOrder();
-            String orderMessage = composeOrderMessage(supplier, qtyToOrder, name);
-            Log.v("Order message: ", orderMessage);
-            String subject = "Order of " + name;
-            Log.v("Order subject: ", subject);
-            composeEmail(supplierEmail,subject,orderMessage);
-        }
-    };
-
-    View.OnClickListener handleDelete = new View.OnClickListener() {
-        public void onClick(View v) {
-
         }
     };
 
@@ -114,6 +89,16 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
         return 0;
     }
 
+    //handles the button that adds a specified amount to the quantity of the product
+    View.OnClickListener handleReceived = new View.OnClickListener() {
+        public void onClick(View v) {
+            int difference = quantityReceived();
+            helper.increaseQty(qty, difference, name);
+            TextView itemQty = (TextView) findViewById(R.id.product_qty);
+            itemQty.setText("Quantity: " + String.valueOf(qty + difference));
+        }
+    };
+
     //gets number received from EditText
     public int quantityReceived () {
         EditText number = (EditText) findViewById(R.id.enterNumberReceived);
@@ -125,6 +110,18 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
         }
         return 0;
     }
+
+    //handles the button that sends an email with the order message for this quantity of the product to this supplier
+    View.OnClickListener handleOrder = new View.OnClickListener() {
+        public void onClick(View v) {
+            int qtyToOrder = quantityToOrder();
+            String orderMessage = composeOrderMessage(supplier, qtyToOrder, name);
+            Log.v("Order message: ", orderMessage);
+            String subject = "Order of " + name;
+            Log.v("Order subject: ", subject);
+            composeEmail(supplierEmail,subject,orderMessage);
+        }
+    };
 
     //gets number to order from EditText
     public int quantityToOrder() {
@@ -158,6 +155,12 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
             startActivity(intent);
         }
     }
+
+    View.OnClickListener handleDelete = new View.OnClickListener() {
+        public void onClick(View v) {
+
+        }
+    };
 
     @Override
     public void update() {
