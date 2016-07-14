@@ -1,8 +1,12 @@
 package com.example.android.inventoryapp2;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -158,9 +162,25 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
 
     View.OnClickListener handleDelete = new View.OnClickListener() {
         public void onClick(View v) {
-
+            onBackPressed();
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to delete " + name)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+                        helper.deleteProduct(name);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 
     @Override
     public void update() {

@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity implements Observer{
         helper = DBHelper.getInstance(this);
         helper.addObserver(this);
 
-        helper.addProduct(new Product("Jeans", 20.0, 5, "Zara", "zara@gmail.com"));
+       /* helper.addProduct(new Product("Jeans", 20.0, 5, "Zara", "zara@gmail.com"));
         helper.addProduct(new Product ("T-shirt", 25.20, 5, "H&M", "hm@gmail.com"));
         helper.addProduct(new Product("Dress", 15.75, 10, "Garage", "garage@gmail.com"));
-        helper.addProduct(new Product("Jeans#2", 25.0, 20, "Zara", "zara@gmail.com"));
+        helper.addProduct(new Product("Jeans#2", 25.0, 20, "Zara", "zara@gmail.com"));*/
 
         cursor =  helper.getAllProducts();
 

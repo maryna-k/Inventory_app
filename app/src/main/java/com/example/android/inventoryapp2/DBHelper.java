@@ -151,4 +151,17 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
         db.delete(Contract.Products.TABLE_NAME, null, null);
         notifyObservers();
     }
+
+    //deletes a product with this name
+    public void deleteProduct(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String where = "product_name =?";
+        String[] whereArgs = {name};
+        try {
+            db.delete(Contract.Products.TABLE_NAME, where, whereArgs);
+            notifyObservers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
