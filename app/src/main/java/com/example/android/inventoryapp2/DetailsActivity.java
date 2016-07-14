@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -162,11 +163,22 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
 
     View.OnClickListener handleDelete = new View.OnClickListener() {
         public void onClick(View v) {
-            onBackPressed();
+            new AlertDialog.Builder(DetailsActivity.this)
+                    .setMessage("Are you sure you want to delete " + name)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+                            helper.deleteProduct(name);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     };
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to delete " + name)
@@ -180,7 +192,7 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
                 })
                 .setNegativeButton("No", null)
                 .show();
-    }
+    }*/
 
     @Override
     public void update() {
