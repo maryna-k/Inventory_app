@@ -121,9 +121,10 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
         return currQty;
     }
 
-    public void decreaseQty (int quantity, int decrease, String name) {
-        quantity = quantity - decrease;
-        if (quantity >= 0) {
+    public int decreaseQty (int quantity, int decrease, String name) {
+
+        if (quantity - decrease >= 0) {
+            quantity = quantity - decrease;
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(Contract.Products.QTY, quantity);
@@ -132,9 +133,10 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
             db.update(Contract.Products.TABLE_NAME, values, where, whereArgs);
             notifyObservers();
         }
+        return quantity;
     }
 
-    public void increaseQty (int quantity, int increase, String name) {
+    public int increaseQty (int quantity, int increase, String name) {
         quantity = quantity + increase;
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -143,6 +145,7 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
             String[] whereArgs = {name};
             db.update(Contract.Products.TABLE_NAME, values, where, whereArgs);
             notifyObservers();
+        return quantity;
     }
 
     //deletes all the entries from the table
