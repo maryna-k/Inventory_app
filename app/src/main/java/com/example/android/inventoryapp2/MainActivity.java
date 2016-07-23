@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements Observer{
 
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements Observer{
 
         listView.setAdapter (itemAdapter);
         listView.setItemsCanFocus(false); //helps to make both view and a sell button clickable
+
+        //Shows an empty TextView if database is empty
+        TextView defaultText = (TextView) findViewById(R.id.i_empty);
+        listView.setEmptyView(defaultText);
 
         //opens DetailsActivity if the listview is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

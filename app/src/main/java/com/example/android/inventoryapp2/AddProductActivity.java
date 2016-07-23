@@ -18,13 +18,12 @@ public class AddProductActivity extends AppCompatActivity {
     int newQuantity;
     String newSupplierName;
     String newSupplierEmail;
-    boolean canAdd = false;
+    boolean canAdd = false; //canAdd is set to true if no info is missing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-
         helper = DBHelper.getInstance(this);
 
         Button addProduct = (Button) findViewById(R.id.add_product_button);
@@ -39,12 +38,14 @@ public class AddProductActivity extends AppCompatActivity {
             newSupplierName = getNewSupplierName();
             newSupplierEmail = getNewSupplierEmail();
 
+            //validates user input and if something is missing displays a toast message. Else sets canAdd to true
             if (newName.equals("") || newPrice == 0 || newSupplierName.equals("") || newSupplierEmail.equals("")) {
                 Toast.makeText(AddProductActivity.this, "Please, enter full information about the product.",
                         Toast.LENGTH_LONG).show();
             }
             else canAdd = true;
 
+            //if all the information is there, program can add the product to the database
             if (canAdd) {
                 helper.addProduct(new Product(newName, newPrice, newQuantity, newSupplierName, newSupplierEmail));
                 Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
