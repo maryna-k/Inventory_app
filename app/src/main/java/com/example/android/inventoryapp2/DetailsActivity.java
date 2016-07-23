@@ -140,7 +140,6 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
     }
 
     private String composeOrderMessage(String supplierName, int quantity, String productName) {
-
         String orderMessage = "Dear " + supplierName + ",\n";
         orderMessage = orderMessage + "Our store would like to order " + quantity + " " + productName + ".\n";
         orderMessage = orderMessage + "Sincerely,\n" + "Store";
