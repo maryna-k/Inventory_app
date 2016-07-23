@@ -7,13 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-
-/*
-interface Observer{
-    void update();
-}
-*/
 
 public class AddProductActivity extends AppCompatActivity {
 
@@ -23,6 +18,7 @@ public class AddProductActivity extends AppCompatActivity {
     int newQuantity;
     String newSupplierName;
     String newSupplierEmail;
+    boolean canAdd = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +26,6 @@ public class AddProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
 
         helper = DBHelper.getInstance(this);
-      /*  helper = DBHelper.getInstance(this);
-        helper.addObserver(this);*/
 
         Button addProduct = (Button) findViewById(R.id.add_product_button);
         addProduct.setOnClickListener(handleAddNewProduct);
@@ -45,17 +39,19 @@ public class AddProductActivity extends AppCompatActivity {
             newSupplierName = getNewSupplierName();
             newSupplierEmail = getNewSupplierEmail();
 
-            Product newProduct = new Product (newName, newPrice, newQuantity, newSupplierName, newSupplierEmail);
-            Log.v("new product: ", newProduct.toString());
-
-            if (newProduct != null) {
-                helper.addProduct(newProduct);
+            if (newName.equals("") || newPrice == 0 || newSupplierName.equals("") || newSupplierEmail.equals("")) {
+                Toast.makeText(AddProductActivity.this, "Please, enter full information about the product.",
+                        Toast.LENGTH_LONG).show();
             }
-            Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
-            startActivity(intent);
+            else canAdd = true;
+
+            if (canAdd) {
+                helper.addProduct(new Product(newName, newPrice, newQuantity, newSupplierName, newSupplierEmail));
+                Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     };
-
 
     //gets name of new product from EditText
     public String getNewProductName() {
@@ -111,13 +107,4 @@ public class AddProductActivity extends AppCompatActivity {
             return "";
         }
     }
-
-    /*@Override
-    public void update() {
-        if (cursor != null) {
-            Cursor newCursor = helper.getAllProducts();
-            itemAdapter.swapCursor(newCursor);
-        }
-    }*/
-
 }
