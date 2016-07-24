@@ -8,13 +8,15 @@ public class Product {
     private double price;
     private String supplier;
     private String email;
+    private byte[] image;
 
-    Product(String name, double price, int qty, String supplier_name, String email) {
+    Product(String name, double price, int qty, String supplier_name, String email, byte[] image) {
         this.name = name;
         this.price = price;
         this.qty = qty;
         this.supplier = supplier_name;
         this.email = email;
+        this.image = image;
     }
 
     public String getName() {
@@ -55,6 +57,14 @@ public class Product {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

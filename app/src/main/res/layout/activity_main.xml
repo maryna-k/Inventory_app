@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout android:id="@+id/relativeLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.android.inventoryapp2.MainActivity"
-        android:id="@+id/list"
-        android:descendantFocusability="blocksDescendants">
-    </ListView>
+        android:descendantFocusability="blocksDescendants"
+        tools:context="com.example.android.inventoryapp2.MainActivity"></ListView>
 
     <TextView
         android:id="@+id/i_empty"
@@ -28,9 +27,9 @@
         android:id="@+id/add_main_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Add"
-        android:layout_alignParentBottom="true" />
+        android:text="Add" />
 
 </RelativeLayout>

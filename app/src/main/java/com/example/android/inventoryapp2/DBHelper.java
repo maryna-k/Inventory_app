@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
     private ArrayList<Observer> Observers = new ArrayList<>();
 
     @Override
-    public void addObserver (Observer observer) {
+    public void addObserver(Observer observer) {
         if (observer != null) {
             Observers.add(observer);
         }
@@ -55,7 +55,8 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
                         Contract.Products.PRICE + " DECIMAL" + ", " +
                         Contract.Products.QTY + " INTEGER" + ", " +
                         Contract.Products.SNAME + " TEXT" + ", " +
-                        Contract.Products.EMAIL + " TEXT" + " )";
+                        Contract.Products.EMAIL + " TEXT" + ", " +
+                        Contract.Products.IMAGE + " BLOB" + " )";
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
@@ -84,10 +85,11 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
         values.put(Contract.Products.QTY, product.getQty());
         values.put(Contract.Products.SNAME, product.getSupplier());
         values.put(Contract.Products.EMAIL, product.getEmail());
+        values.put(Contract.Products.IMAGE, product.getImage());
 
         String name = product.getName();
         String sqlQuery = "SELECT rowid _id, * FROM " + Contract.Products.TABLE_NAME + " WHERE product_name =? ";
-        Cursor c = db.rawQuery(sqlQuery, new String[] {name});
+        Cursor c = db.rawQuery(sqlQuery, new String[]{name});
         //c.moveToFirst();
         if (c != null && c.getCount() != 0) {
         } else {
@@ -107,22 +109,21 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
     public Cursor getOneProduct(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT rowid _id, * FROM " + Contract.Products.TABLE_NAME + " WHERE product_name =? ";
-        Cursor cursor = db.rawQuery(query, new String[] {name});
+        Cursor cursor = db.rawQuery(query, new String[]{name});
         cursor.moveToFirst();
         return cursor;
     }
 
-    public int getCurrentQty (String name) {
+    public int getCurrentQty(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT rowid _id, * FROM " + Contract.Products.TABLE_NAME + " WHERE product_name =? ";
-        Cursor cursor = db.rawQuery(query, new String[] {name});
+        Cursor cursor = db.rawQuery(query, new String[]{name});
         cursor.moveToFirst();
         int currQty = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
         return currQty;
     }
 
-    public int decreaseQty (int quantity, int decrease, String name) {
-
+    public int decreaseQty(int quantity, int decrease, String name) {
         if (quantity - decrease >= 0) {
             quantity = quantity - decrease;
             SQLiteDatabase db = this.getWritableDatabase();
@@ -136,15 +137,15 @@ public class DBHelper extends SQLiteOpenHelper implements Observable {
         return quantity;
     }
 
-    public int increaseQty (int quantity, int increase, String name) {
+    public int increaseQty(int quantity, int increase, String name) {
         quantity = quantity + increase;
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(Contract.Products.QTY, quantity);
-            String where = "product_name =?";
-            String[] whereArgs = {name};
-            db.update(Contract.Products.TABLE_NAME, values, where, whereArgs);
-            notifyObservers();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Contract.Products.QTY, quantity);
+        String where = "product_name =?";
+        String[] whereArgs = {name};
+        db.update(Contract.Products.TABLE_NAME, values, where, whereArgs);
+        notifyObservers();
         return quantity;
     }
 

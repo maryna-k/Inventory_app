@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements Observer{
+public class MainActivity extends AppCompatActivity implements Observer {
 
     DBHelper helper;
     SQLiteDatabase db;
@@ -27,18 +27,13 @@ public class MainActivity extends AppCompatActivity implements Observer{
         helper = DBHelper.getInstance(this);
         helper.addObserver(this);
 
-        /*helper.addProduct(new Product("Jeans", 20.0, 5, "Zara", "zara@gmail.com"));
-        helper.addProduct(new Product ("T-shirt", 25.20, 5, "H&M", "hm@gmail.com"));
-        helper.addProduct(new Product("Dress", 15.75, 10, "Garage", "garage@gmail.com"));
-        helper.addProduct(new Product("Jeans#2", 25.0, 20, "Zara", "zara@gmail.com")); */
-
-        cursor =  helper.getAllProducts();
+        cursor = helper.getAllProducts();
 
         ListView listView = (ListView) findViewById(R.id.list);
 
         itemAdapter = new InventoryCursorAdapter(MainActivity.this, cursor, 0);
 
-        listView.setAdapter (itemAdapter);
+        listView.setAdapter(itemAdapter);
         listView.setItemsCanFocus(false); //helps to make both view and a sell button clickable
 
         //Shows an empty TextView if database is empty

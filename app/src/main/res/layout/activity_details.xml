@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/product_name"
         style="@style/list_item_name" />
 
-    <!--<ImageView
+    <ImageView
         android:id="@+id/product_image"
-        android:style="@style/productImage"/>-->
+        style="@style/productImage" />
 
     <TextView
         android:id="@+id/product_price"
@@ -25,42 +26,44 @@
         android:id="@+id/qty_sold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/product_qty">
+        android:layout_below="@id/product_qty"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_sold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Sold"/>
+            android:text="Sold" />
 
         <EditText
             android:id="@+id/enterNumberSold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:hint="Quantity"/>
+            android:hint="Quantity" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/qty_received"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/qty_sold">
+        android:layout_below="@id/qty_sold"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_received"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Received"/>
+            android:text="Received" />
 
         <EditText
             android:id="@+id/enterNumberReceived"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:hint="Quantity"/>
+            android:hint="Quantity" />
     </LinearLayout>
 
     <TextView
@@ -79,32 +82,33 @@
         android:id="@+id/qty_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/email"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/email">
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Order"/>
+            android:text="Order" />
 
         <EditText
             android:id="@+id/enterNumberToOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:hint="Quantity"/>
+            android:hint="Quantity" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Delete product"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:text="Delete product" />
 
 </RelativeLayout>

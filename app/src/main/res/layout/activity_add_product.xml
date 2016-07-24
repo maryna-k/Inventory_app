@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.android.inventoryapp2.AddProductActivity">
 
     <EditText
         android:id="@+id/add_product_name"
         style="@style/add_product_button"
-        android:hint="Name"/>
+        android:hint="Name" />
 
     <EditText
         android:id="@+id/add_product_price"
         style="@style/add_product_button"
-        android:hint="Price"/>
+        android:hint="Price" />
 
     <EditText
         android:id="@+id/add_product_qty"
         style="@style/add_product_button"
-        android:hint="Quantity"/>
+        android:hint="Quantity" />
 
     <EditText
         android:id="@+id/add_product_supplier"
         style="@style/add_product_button"
-        android:hint="Supplier name"/>
+        android:hint="Supplier name" />
 
     <EditText
         android:id="@+id/add_product_email"
         style="@style/add_product_button"
-        android:hint="Supplier email"/>
+        android:hint="Supplier email" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_product_image"
+            style="@style/add_product_image"
+            android:text="Image" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/add_product_button"
         style="@style/add_product_button"
-        android:text="Add new product"/>
+        android:text="Add new product" />
 
 </LinearLayout>

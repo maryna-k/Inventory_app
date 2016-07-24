@@ -3,6 +3,8 @@ package com.example.android.inventoryapp2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,15 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DetailsActivity extends AppCompatActivity implements Observer{
+public class DetailsActivity extends AppCompatActivity implements Observer {
     Cursor cursor;
     DBHelper helper;
     String name;
     String supplier;
     String supplierEmail;
     int qty;
+    byte[] img;
     InventoryCursorAdapter itemAdapter;
 
     @Override
@@ -41,17 +45,22 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
         TextView itemQty = (TextView) findViewById(R.id.product_qty);
         TextView itemSupplier = (TextView) findViewById(R.id.supplier);
         TextView itemEmail = (TextView) findViewById(R.id.email);
+        ImageView itemImage = (ImageView) findViewById(R.id.product_image);
 
         int price = cursor.getInt(cursor.getColumnIndexOrThrow("price"));
         qty = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
         supplier = cursor.getString(cursor.getColumnIndexOrThrow("supplier_name"));
         supplierEmail = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+        img = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
 
-        itemName.setText("Product: " + name);
+        Bitmap b1 = BitmapFactory.decodeByteArray(img, 0, img.length);
+
+        itemName.setText(name);
         itemPrice.setText("Price: " + String.valueOf(price) + "$");
         itemQty.setText("Quantity: " + String.valueOf(qty));
         itemSupplier.setText("Supplier: " + supplier);
         itemEmail.setText("Email: " + supplierEmail);
+        itemImage.setImageBitmap(b1);
 
         Button sold = (Button) findViewById(R.id.button_sold);
         sold.setOnClickListener(handleSold);
@@ -81,12 +90,12 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
     };
 
     //gets number sold from EditText
-    public int quantitySold () {
+    public int quantitySold() {
         EditText number = (EditText) findViewById(R.id.enterNumberSold);
         try {
             int numberSold = Integer.parseInt(number.getText().toString());
             return numberSold;
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Log.v("Parse quantity sold: ", "Could not parse quantity sold");
         }
         return 0;
@@ -103,12 +112,12 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
     };
 
     //gets number received from EditText
-    public int quantityReceived () {
+    public int quantityReceived() {
         EditText number = (EditText) findViewById(R.id.enterNumberReceived);
         try {
             int numberReceived = Integer.parseInt(number.getText().toString());
             return numberReceived;
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Log.v("Quantity received:", "Could not parse quantity received");
         }
         return 0;
@@ -122,7 +131,7 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
             Log.v("Order message: ", orderMessage);
             String subject = "Order of " + name;
             Log.v("Order subject: ", subject);
-            composeEmail(supplierEmail,subject,orderMessage);
+            composeEmail(supplierEmail, subject, orderMessage);
         }
     };
 
@@ -133,7 +142,7 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
             int qty = Integer.parseInt(qtyToOrder.getText().toString());
             Log.v("Order quantity: ", String.valueOf(qty));
             return qty;
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Log.v("Parse quantity order", "Could not parse quantity to order");
         }
         return 0;
@@ -150,10 +159,10 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
     public void composeEmail(String supplierEmail, String subject, String orderMessage) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); //only email apps should handle this intent
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {supplierEmail});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{supplierEmail});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, orderMessage);
-        if (intent.resolveActivity(getPackageManager())!= null) {
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }
@@ -163,7 +172,7 @@ public class DetailsActivity extends AppCompatActivity implements Observer{
             new AlertDialog.Builder(DetailsActivity.this)
                     .setMessage("Are you sure you want to delete " + name)
                     .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
                             helper.deleteProduct(name);

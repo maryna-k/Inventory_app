@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class InventoryCursorAdapter extends CursorAdapter implements Observer{
+public class InventoryCursorAdapter extends CursorAdapter implements Observer {
     private LayoutInflater cursorInflater;
     Context context;
     DBHelper helper = DBHelper.getInstance(context);
