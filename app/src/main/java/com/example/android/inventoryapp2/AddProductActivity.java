@@ -139,9 +139,7 @@ public class AddProductActivity extends AppCompatActivity {
             Uri selectedImage = data.getData();
 
             try {
-                InputStream imageStream = getContentResolver().openInputStream(selectedImage);
-                Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-
+                Bitmap yourSelectedImage = decodeUri(selectedImage);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 imageInByte = stream.toByteArray();
@@ -150,5 +148,29 @@ public class AddProductActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    //resize picture
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, options);
+
+        final int REQUIRED_SIZE = 140;
+
+        // Find the correct scale value
+        int width = options.outWidth, height = options.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width / 2 < REQUIRED_SIZE || height / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width /= 2;
+            height /= 2;
+            scale *= 2;
+        }
+        BitmapFactory.Options options2 = new BitmapFactory.Options();
+        options2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, options2);
     }
 }
